@@ -11,13 +11,8 @@ import org.tudalgo.algoutils.tutor.general.conversion.ArrayConverter;
 
 import java.util.List;
 
-import static h10.PublicTutorUtils.PROBABILITY_ALWAYS_ADD;
-import static h10.PublicTutorUtils.contextH2;
-import static h10.PublicTutorUtils.copy;
-import static h10.PublicTutorUtils.listItemAsList;
-import static org.tudalgo.algoutils.tutor.general.assertions.Assertions2.assertEquals;
-import static org.tudalgo.algoutils.tutor.general.assertions.Assertions2.assertNotNull;
-import static org.tudalgo.algoutils.tutor.general.assertions.Assertions2.assertNull;
+import static h10.PublicTutorUtils.*;
+import static org.tudalgo.algoutils.tutor.general.assertions.Assertions2.*;
 
 /**
  * Defines the public JUnit test cases related to the task H2.
@@ -277,12 +272,20 @@ public final class H2_PublicTests {
             List<ListItem<ExpressNode<Integer>>> node = itemRefs.get(i);
             // Offset is 1 because of the sentinel node
             int expectedSize = numberOfElementsLevel[i] + 1;
+            int expectedAmountOfLevels = 2;
+            assertEquals(
+                itemRefs.size(),
+                expectedAmountOfLevels,
+                context,
+                result -> String.format("The call of the method add(%s) should add the element %s on  the level %s "
+                    + "and modify the amount of levels to %s, but given %s levels.", key, key, level, expectedAmountOfLevels, result.object())
+            );
             assertEquals(
                 expectedSize,
                 node.size(),
                 context,
                 result -> String.format("The call of the method add(%s) should add the element %s on  the level %s "
-                    + "and modify the size to %s, but given size %s.", key, key, level, expectedSize, result.object())
+                    + "and level %s should contain %s elements, but it contains %s elements.", key, key, level, level, expectedSize, result.object())
             );
             assertEquals(
                 key,
