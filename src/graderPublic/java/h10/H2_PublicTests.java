@@ -278,7 +278,7 @@ public final class H2_PublicTests {
                 expectedAmountOfLevels,
                 context,
                 result -> String.format("The call of the method add(%s) should add the element %s on  the level %s "
-                    + "and modify the amount of levels to %s, but given %s levels.", key, key, level, expectedAmountOfLevels, result.object())
+                    + "and modify the amount of levels to %s, but given %s levels.", key, key, level, expectedAmountOfLevels, itemRefs.size())
             );
             assertEquals(
                 expectedSize,
