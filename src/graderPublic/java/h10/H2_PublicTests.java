@@ -237,7 +237,7 @@ public final class H2_PublicTests {
      *         "key": integer,
      *         "numberOfElementsLevel": array of integers,
      *         "refs": array of integers,
-     *         "numberOfLayers: integer
+     *         "numberOfLevels: integer
      *     }
      * }</pre>
      *
@@ -245,7 +245,7 @@ public final class H2_PublicTests {
      * @param key                   the element to add
      * @param numberOfElementsLevel the number of elements on each level
      * @param refs                  the indices of the added elements
-     * @param numberOfLayers        the number of layers
+     * @param numberOfLevels        the number of levels
      */
     @DisplayName("10 | Methode erstellt neue Ebenen korrekt.")
     @ParameterizedTest(name = "Test {index}: Erstellen einer neuen Ebene beim Einfügen von {1}.")
@@ -255,7 +255,7 @@ public final class H2_PublicTests {
         @Property("key") Integer key,
         @Property("numberOfElementsLevel") @ConvertWith(ArrayConverter.Auto.class) Integer[] numberOfElementsLevel,
         @Property("refs") @ConvertWith(ArrayConverter.Auto.class) Integer[] refs,
-        @Property("numberOfLayers") int numberOfLayers
+        @Property("numberOfLevels") int numberOfLevels
     ) {
         Probability probability = new Probability() {
             private boolean first = true;
@@ -277,11 +277,11 @@ public final class H2_PublicTests {
         List<List<ListItem<ExpressNode<Integer>>>> itemRefs = listItemAsList(list.head);
         assertEquals(
             itemRefs.size(),
-            numberOfLayers,
+            numberOfLevels,
             context,
             result -> String.format(
-                "The call of the method add(%s) should change the number of layers to %s, but given %s",
-                key, numberOfLayers, itemRefs.size())
+                "The call of the method add(%s) should change the amount of levels to %s, but given %s",
+                key, numberOfLevels, itemRefs.size())
         );
         for (int i = 0; i < numberOfElementsLevel.length; i++) {
             int level = i;
