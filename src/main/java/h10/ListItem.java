@@ -63,7 +63,7 @@ public class ListItem<T> {
 
     @Override
     public String toString() {
-        return String.valueOf(key);
+        return "a ListItem with key: " + key + " and next: " + (next == null ? "null" : next.key);
     }
 
 }
