@@ -69,7 +69,7 @@ public class SkipList<T> {
      * @param maxHeight the maximum height of the skip list
      */
     public SkipList(Comparator<? super T> cmp, int maxHeight) {
-        this(cmp, maxHeight, () -> false);
+        this(cmp, maxHeight, DEFAULT);
     }
 
     /**
@@ -200,5 +200,19 @@ public class SkipList<T> {
         sb.append("]");
         return sb.toString();
     }
+    /**
+     * Intended to be used if the probability does not matter.
+     */
+    public static final Probability DEFAULT = new Probability() {
+        @Override
+        public boolean nextBoolean() {
+            return false;
+        }
+
+        @Override
+        public String toString(){
+            return "0%";
+        }
+    };
 
 }
