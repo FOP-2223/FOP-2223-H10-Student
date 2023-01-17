@@ -86,7 +86,19 @@ public class ExpressNode<T> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, up, down);
+        int hashCode = 1;
+        hashCode = 31 * hashCode + (value == null ? 0 : value.hashCode());
+        hashCode = hashCode(prev, hashCode);
+        hashCode = hashCode(up, hashCode);
+        hashCode = hashCode(down, hashCode);
+        return hashCode;
+    }
+
+    private int hashCode(ListItem<ExpressNode<T>> item, int hashCode){
+        for(; item != null; item = item.next){
+            hashCode = 31 * hashCode + ((item.key == null || item.key.value == null) ? 0 : item.key.value.hashCode());
+        }
+        return hashCode;
     }
 
     @Override
