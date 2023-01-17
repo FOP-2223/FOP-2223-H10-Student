@@ -86,25 +86,25 @@ public class ExpressNode<T> {
 
     @Override
     public int hashCode() {
-        int hashCode = 1;
-        hashCode = 31 * hashCode + (value == null ? 0 : value.hashCode());
-        hashCode = hashCode(prev, hashCode);
-        hashCode = hashCode(up, hashCode);
-        hashCode = hashCode(down, hashCode);
-        return hashCode;
+        return Objects.hash(value, hashCode(prev), hashCode(up), hashCode(down));
     }
 
     /**
-     * Calculates the hashCode of a given ListItem based on a previous value and that item's key's hashCode.
-     * Uses the standard java implementation.
-     * @param listItem the item to be hashed
-     * @param previousHash the previous hashCode
-     * @return the newly calculated hashCode
+     * Returns the hash code for the specified list item sequence using the following formula:
+     * <pre>{@code
+     *    for each value in the sequence:
+     *      31 * hashCode + (value == null ? 0 : value.hashCode())
+     *    }</pre>
+     *
+     * @param item the list item sequence to compute the hash code for
+     *
+     * @return the hash code for the specified list item sequence
      */
-    private int hashCode(ListItem<ExpressNode<T>> listItem, int previousHash){
-        int hashCode = previousHash;
-        for(ListItem<ExpressNode<T>> item = listItem; item != null; item = item.next){
-            hashCode = 31 * hashCode + ((item.key == null || item.key.value == null) ? 0 : item.key.value.hashCode());
+    private int hashCode(ListItem<ExpressNode<T>> item) {
+        int hashCode = 1;
+        for (ListItem<ExpressNode<T>> current = item; current != null; current = current.next) {
+            hashCode = 31 * hashCode + ((current.key == null || current.key.value == null) ?
+                0 : current.key.value.hashCode());
         }
         return hashCode;
     }
