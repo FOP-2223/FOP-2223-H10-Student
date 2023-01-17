@@ -55,6 +55,21 @@ public class PublicTutorUtils {
     private PublicTutorUtils() {
     }
 
+
+    /**
+     * Returns the string representation of the given object where the string representation is the result of the
+     * name of the class followed by the hash code of the object in hexadecimal format.
+     *
+     * @param object the object to represent as a string.
+     *
+     * @return the string representation of the given object.
+     *
+     * @see Object#toString()
+     */
+    public static String toString(Object object) {
+        return object == null ? "null" : object.getClass().getName() + "@" + Integer.toHexString(object.hashCode());
+    }
+
     /**
      * Returns the {@link Criterion} for the given class.
      *
