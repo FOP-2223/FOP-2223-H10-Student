@@ -87,20 +87,24 @@ public class ExpressNode<T> {
     @Override
     public int hashCode() {
         int hashCode = 1;
-        hashCode = 31 * (hashCode + (value == null ? 0 : value.hashCode()) + hashCode(prev) + hashCode(up) + hashCode(down));
+        hashCode = 31 * hashCode + (value == null ? 0 : value.hashCode());
+        hashCode = hashCode(prev, hashCode);
+        hashCode = hashCode(up, hashCode);
+        hashCode = hashCode(down, hashCode);
         return hashCode;
     }
 
     /**
-     * calculates the hashCode of a given listItem using a method thought up by Nhan Huynh.
+     * Calculates the hashCode of a given ListItem based on a previous value and that item's key's hashCode.
+     * Uses the standard java implementation.
      * @param listItem the item to be hashed
-     * @return the calculated hashCode
+     * @param previousHash the previous hashCode
+     * @return the newly calculated hashCode
      */
-
-    private int hashCode(ListItem<ExpressNode<T>> listItem){
-        int hashCode = 0;
+    private int hashCode(ListItem<ExpressNode<T>> listItem, int previousHash){
+        int hashCode = previousHash;
         for(ListItem<ExpressNode<T>> item = listItem; item != null; item = item.next){
-            hashCode = (item.key == null || item.key.value == null) ? 0 : item.key.value.hashCode();
+            hashCode = 31 * hashCode + ((item.key == null || item.key.value == null) ? 0 : item.key.value.hashCode());
         }
         return hashCode;
     }
