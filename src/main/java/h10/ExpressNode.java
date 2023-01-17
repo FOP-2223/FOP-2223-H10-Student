@@ -86,7 +86,7 @@ public class ExpressNode<T> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, prev, up, down);
+        return Objects.hash(value, up, down);
     }
 
     @Override
