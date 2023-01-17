@@ -201,7 +201,7 @@ public class SkipList<T> {
         return sb.toString();
     }
     /**
-     * Intended to be used if the probability does not matter.
+     * Default probability of 0%
      */
     public static final Probability DEFAULT = new Probability() {
         @Override
